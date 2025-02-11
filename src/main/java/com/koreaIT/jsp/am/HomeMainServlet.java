@@ -19,6 +19,9 @@ public class HomeMainServlet extends HttpServlet {
 		response.getWriter().append("ㅎㄴ <br />");
 		response.getWriter().append("ㅎㄴ 테스트<br />");
 		
+		
+		String test = null;
+		
 	}
 	
 }
