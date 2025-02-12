@@ -14,7 +14,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시물 리스트</title>
+<title>게시물 삭제</title>
+
+
 </head>
 <body>
 	<div>
@@ -29,9 +31,11 @@
 	</div>
 	<div>
 		<a href="list">목록</a>
+		<a href="delete?id=<%= articleMap.get("id") %>">삭제</a>
 	</div>
-
-
 
 </body>
 </html>
+<script>
+	
+</script>
