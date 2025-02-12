@@ -11,6 +11,16 @@ CREATE TABLE article(
 	, `body` TEXT NOT null
 );
 
+INSERT INTO article (regdate, updateDate, title, `body`)
+SELECT NOW(), NOW(), CONCAT('제목_', RAND()), CONCAT('내용_', RAND())
+FROM article;
+
+SELECT * FROM article
+	ORDER BY id DESC;
+
+# 테이블 데이터 지움
+truncate article;
+
 ALTER TABLE article ADD memberId int UNSIGNED NOT NULL AFTER updateDate; 
 # 조회수 추가===================
 ALTER TABLE article ADD COLUMN vCnt int UNSIGNED NOT NULL DEFAULT 0 AFTER updateDate;
@@ -36,6 +46,12 @@ SELECT * FROM article
 	ORDER BY id DESC;
 	DESC article;
 
+SELECT * FROM article
+	ORDER BY id DESC;
+
+DELETE FROM article
+WHERE id = 3;
+
 UPDATE article
 	SET title = '제목1'
 		, `body` = '내용1'
@@ -56,15 +72,6 @@ SELECT count(id) > 0
 FROM `member`
 WHERE loginId = 'qq';
 
-SELECT * FROM `member` 
-WHERE loginId = 'q' 
-AND loginPw = 'q';
-
-SELECT * FROM article 
-ORDER BY id DESC;
-
-SELECT * FROM `member` 
-ORDER BY id DESC;
 
 ALTER TABLE article DROP COLUMN views;
 
@@ -76,3 +83,5 @@ SELECT a.*
 	FROM article AS a
 	INNER JOIN `member` AS m
 	ON a.memberId = m.id;
+	
+

@@ -4,6 +4,8 @@
     
 <%
 	List<Map<String, Object>> articleListMap = (List<Map<String, Object>>) request.getAttribute("articleListMap");
+
+
 %>    
     
 <!DOCTYPE html>
