@@ -16,15 +16,22 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<h1>리스트</h1>
-	<ul>
-	<% for (Map<String,Object> article : articleListMap) { %>
-		<li><%=article.get("id")  %> <%=article.get("title")  %> <%=article.get("body")  %> </li>
-		
-	<% 	}  %>
 	
-	</ul>
+<body>
+	<div>
+		<a href="<%= request.getContextPath() %>/home/main">메인</a>
+	</div>
+	<div>
+		<h2>리스트</h2>
+		<ul>
+		<% for (Map<String,Object> article : articleListMap) { %>
+			<li><%= article.get("id") %> | <%= article.get("updateDate") %> | <a href="detail?id=<%= article.get("id") %>" > <%= article.get("title") %></a></li>
+			
+		<% 	}  %>
+		
+		</ul>
+	</div>
+	
 
 
 </body>

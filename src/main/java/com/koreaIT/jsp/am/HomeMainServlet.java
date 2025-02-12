@@ -16,12 +16,6 @@ public class HomeMainServlet extends HttpServlet {
     }
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8;");
-		response.getWriter().append("ㅎㄴ <br />");
-		response.getWriter().append("ㅎㄴ 테스트<br />");
-		
-		
-		String test = null;
-		
+		request.getRequestDispatcher("/jsp/home/main.jsp").forward(request, response);
 	}
-	
 }
