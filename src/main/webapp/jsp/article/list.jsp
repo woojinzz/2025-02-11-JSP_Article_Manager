@@ -22,6 +22,9 @@
 		<a href="<%= request.getContextPath() %>/home/main">메인</a>
 	</div>
 	<div>
+		<a href= "write">글작성</a>
+	</div>
+	<div>
 		<h2>리스트</h2>
 		<table border="1">
 			<thead>
