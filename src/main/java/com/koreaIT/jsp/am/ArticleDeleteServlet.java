@@ -9,6 +9,7 @@ import java.util.Map;
 
 import com.koreaIT.jsp.am.util.DBUtil;
 import com.koreaIT.jsp.am.util.SecSql;
+import com.koreaIT.jsp.config.Config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -22,17 +23,14 @@ public class ArticleDeleteServlet extends HttpServlet {
  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=UTF-8;");
-		
-		final String URL = "jdbc:mysql://localhost:3306/jsp_am?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull"; // DB
-		final String USER = "root"; // 3DB 사용자 이름
-		final String PASSWORD = "qwer"; // DB 비밀번호
+
 		
 		Connection conn = null;
 		
 	    try {
-	    	Class.forName("com.mysql.jdbc.Driver");
-	    	conn = DriverManager.getConnection(URL, USER, PASSWORD);
-	  
+	    	Class.forName(Config.getDBDriverName());
+	    	conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUsr(), Config.getDBPW());
+	    	
 	    	int id = Integer.parseInt(request.getParameter("id"));
 //	    	response.getWriter().append(String.format("<div>== %d==</div>", id));
 

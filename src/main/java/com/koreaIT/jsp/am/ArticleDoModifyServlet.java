@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import com.koreaIT.jsp.am.util.DBUtil;
 import com.koreaIT.jsp.am.util.SecSql;
+import com.koreaIT.jsp.config.Config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -24,15 +25,12 @@ public class ArticleDoModifyServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8;");
 //		response.getWriter().append(String.format("제목은 %s", title));
 		
-		final String URL = "jdbc:mysql://localhost:3306/jsp_am?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull"; // DB
-		final String USER = "root"; // 3DB 사용자 이름
-		final String PASSWORD = "qwer"; // DB 비밀번호
 		
 		Connection conn = null;
 		
 	    try {
-	    	Class.forName("com.mysql.cj.jdbc.Driver");
-	    	conn = DriverManager.getConnection(URL, USER, PASSWORD);
+	    	Class.forName(Config.getDBDriverName());
+	    	conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUsr(), Config.getDBPW());
 	    	
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
