@@ -75,3 +75,18 @@ public class MemberDoJoinServlet extends HttpServlet {
 		doGet(request, response);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

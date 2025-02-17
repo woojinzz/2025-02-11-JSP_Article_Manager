@@ -7,21 +7,12 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
-@WebServlet("/home/main")
-public class HomeMainServlet extends HttpServlet {
+@WebServlet("/member/login")
+public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    public HomeMainServlet() {
-        super();
-    }
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8;");
-		request.getRequestDispatcher("/jsp/home/main.jsp").forward(request, response);
-		
-//		HttpSession session = request.getSession();
-//		session.setAttribute("", session);
-//		
-//		session.getAttribute("");
+		request.getRequestDispatcher("/jsp/member/login.jsp").forward(request, response);
 	}
 }
