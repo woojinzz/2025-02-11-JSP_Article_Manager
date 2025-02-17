@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/loginIdChk")
+@WebServlet("/member/doJoin")
 public class MemberDoJoinServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     public MemberDoJoinServlet() {
@@ -30,22 +30,30 @@ public class MemberDoJoinServlet extends HttpServlet {
 	    	Class.forName(Config.getDBDriverName());
 	    	conn = DriverManager.getConnection(Config.getDBUrl(), Config.getDBUsr(), Config.getDBPW());
 	    	
-	    	String memberName = request.getParameter("memberName");
-			String memberId = request.getParameter("memberId");
-			String memberPw = request.getParameter("memberPw");
-	    
-	    
+	    	String loginName = request.getParameter("loginName");
+			String loginId = request.getParameter("loginId");
+			String loginPw = request.getParameter("loginPw");
+			
 	    	SecSql sql = new SecSql();
+	    	sql.append("SELECT count(id) FROM member");	    	   	
+	    	sql.append("WHERE loginId = ?", loginId);	    	   	
+	    	int loginIdDupChk = DBUtil.selectRowIntValue(conn, sql);
+	    	
+	    	if (loginIdDupChk == 1) {
+	    		response.getWriter().append(String.format("<script>alert('%s 은 이미 사용중인 아이디 입니다.'); history.back(); </script>", loginId));
+		    	return;
+	    	} 
+	    	
+	    	sql = new SecSql();
 	    	sql.append("INSERT INTO member");	    	   	
 	    	sql.append("SET regDate = NOW()");	    	   	
 	    	sql.append(", updateDate = NOW()");	    	   	
-	    	sql.append(", loginId = ?", memberId);	    	   	
-	    	sql.append(", loginPw = ?", memberPw);	    	   	
-	    	sql.append(", `name` = ?", memberName);	    	   	
+	    	sql.append(", loginId = ?", loginId);	    	   	
+	    	sql.append(", loginPw = ?", loginPw);	    	   	
+	    	sql.append(", `name` = ?", loginName);	    	   	
+	    	DBUtil.insert(conn, sql);
 	    
-	    	int id = DBUtil.insert(conn, sql);
-	    
-	    	response.getWriter().append(String.format("<script>alert('%s 회원님 가입을 축하합니다.'); location.replace('../home/main'); </script>", memberName));
+	    	response.getWriter().append(String.format("<script>alert('%s 회원님 가입을 축하합니다.'); location.replace('../home/main'); </script>", loginId));
 	    	
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -61,14 +69,9 @@ public class MemberDoJoinServlet extends HttpServlet {
 				}
 			}
 		}
-	
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
-		
-		
 	}
-
 }
