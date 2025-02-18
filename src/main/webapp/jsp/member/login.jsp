@@ -23,12 +23,12 @@
 			form.loginPw.value = form.loginPw.value.trim();
 			
 			if (form.loginId.value.length == 0) {
-				alert('아이디는 필수 입력 정보입니다.');
+				alert('아이디를 입력해 주세요.');
 				form.loginId.focus();
 				return;
 			}
 			if (form.loginPw.value.length == 0) {
-				alert('비밀번호는 필수 입력 정보입니다.');
+				alert('비밀번호를 입력해 주세요.');
 				form.loginPw.focus();
 				return;
 			}
