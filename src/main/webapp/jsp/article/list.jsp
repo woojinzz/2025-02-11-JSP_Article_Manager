@@ -8,6 +8,8 @@
 	int end = (int) request.getAttribute("end"); 
 	int totalPages = (int) request.getAttribute("totalPages"); 
 	int currentPage = (int) request.getAttribute("currentPage"); 
+	int loginedMemberId = (int) request.getAttribute("loginedMemberId");
+
 %>    
     
 <!DOCTYPE html>
@@ -21,9 +23,11 @@
 	<div>
 		<a href="<%= request.getContextPath() %>/home/main">메인</a>
 	</div>
-	<div>
-		<a href= "write">글작성</a>
-	</div>
+	
+	<% if (loginedMemberId != -1) { %>
+		<div><a href= "write">글작성</a></div>
+	<% } %>
+	
 	<div>
 		<h2>리스트</h2>
 		<table border="1">
@@ -32,6 +36,7 @@
 					<th>번호</th> 
 					<th>날짜</th> 
 					<th>제목</th> 
+					<th>작성자</th> 
 				</tr>
 			</thead>
 			<tbody>
@@ -42,6 +47,7 @@
 					<td><%= article.get("id") %></td>
 					<td><%= article.get("updateDate") %></td>
 					<td><a href="detail?id=<%= article.get("id") %>" > <%= article.get("title") %></a></td>
+						<td><%= article.get("writerName") %></td>
 				</tr>
 				<% 
 				}
